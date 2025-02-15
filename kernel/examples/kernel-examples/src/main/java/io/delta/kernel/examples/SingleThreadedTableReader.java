@@ -112,6 +112,9 @@ public class SingleThreadedTableReader
                         Row scanFileRow = scanFileRows.next();
                         FileStatus fileStatus =
                             InternalScanFileUtils.getAddFileStatus(scanFileRow);
+			//CloseableIterator<FileStatus> fileIter = singletonCloseableIterator(fileStatus);
+			//String filePath = fileIter.next().getPath();
+			//System.out.printf("read parquet file " + filePath);
                         CloseableIterator<ColumnarBatch> physicalDataIter =
                             engine.getParquetHandler().readParquetFiles(
                                 singletonCloseableIterator(fileStatus),

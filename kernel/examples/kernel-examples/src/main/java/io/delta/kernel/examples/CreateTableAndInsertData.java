@@ -60,19 +60,19 @@ public class CreateTableAndInsertData extends BaseTableWriter {
         String partitionTblPath = location + "/example_partitioned";
 
         // CTAS example for unpartitioned tables
-        createTableWithSampleData(unpartitionedTblPath);
+        //createTableWithSampleData(unpartitionedTblPath);
 
         // CTAS example for partitioned tables
-        createPartitionedTableWithSampleData(partitionTblPath);
+        //createPartitionedTableWithSampleData(partitionTblPath);
 
         // Insert into an existing table.
         insertDataIntoUnpartitionedTable(unpartitionedTblPath);
 
         // Example of idempotent inserts
-        idempotentInserts(unpartitionedTblPath);
+        //idempotentInserts(unpartitionedTblPath);
 
         // Example of checkpointg
-        insertWithOptionalCheckpoint(unpartitionedTblPath);
+        //insertWithOptionalCheckpoint(unpartitionedTblPath);
     }
 
     public TransactionCommitResult createTableWithSampleData(String tablePath) throws IOException {

@@ -27,8 +27,11 @@ limitations under the License.-->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <staging.repo.url>""</staging.repo.url>
-        <delta-kernel.version>3.2.0-SNAPSHOT</delta-kernel.version>
+        <delta-kernel.version>3.3.0</delta-kernel.version>
         <hadoop.version>3.3.1</hadoop.version>
+		<io-projectreactor-core.version>3.0.2.RELEASE</io-projectreactor-core.version>
+		<io-projectreactor-ipc.version>0.5.1.RELEASE</io-projectreactor-ipc.version>
+		<io-netty-all.version>4.1.5.Final</io-netty-all.version>
     </properties>
 
     <repositories>
@@ -44,6 +47,31 @@ limitations under the License.-->
             <artifactId>delta-kernel-api</artifactId>
             <version>${delta-kernel.version}</version>
         </dependency>
+                <dependency>
+                        <groupId>io.projectreactor</groupId>
+                        <artifactId>reactor-core</artifactId>
+                        <version>3.6.14</version>
+                </dependency>
+                <dependency>
+                        <groupId>io.projectreactor</groupId>
+                        <artifactId>reactor-net</artifactId>
+                        <version>2.0.8.RELEASE</version>
+                </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+								<dependency>
+									<groupId>io.projectreactor.ipc</groupId>
+									<artifactId>reactor-netty</artifactId>
+									<version>${io-projectreactor-ipc.version}</version>
+								</dependency>
+								<dependency>
+									<groupId>io.netty</groupId>
+									<artifactId>netty-all</artifactId>
+									<version>${io-netty-all.version}</version>
+								</dependency>
 
         <dependency>
             <groupId>io.delta</groupId>
@@ -82,4 +110,18 @@ limitations under the License.-->
         </dependency>
 
     </dependencies>
+    <build>
+	<plugins>
+	  <plugin>
+    	    <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <configuration>
+              <outputDirectory>
+                ${project.build.directory}
+              </outputDirectory>
+    	    </configuration>
+	</plugin>
+      </plugins>
+    </build>
 </project>
+
