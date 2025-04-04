@@ -40,6 +40,8 @@ import org.apache.parquet.hadoop.api.WriteSupport;
 import org.apache.parquet.hadoop.metadata.CompressionCodecName;
 import org.apache.parquet.io.api.RecordConsumer;
 import org.apache.parquet.schema.MessageType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implements writing data given as {@link FilteredColumnarBatch} to Parquet files.
@@ -63,6 +65,7 @@ public class ParquetFileWriter {
   private final List<Column> statsColumns;
 
   private long currentFileNumber; // used to generate the unique file names.
+  private static final Logger logger = LoggerFactory.getLogger(ParquetFileWriter.class);
 
   /**
    * Create writer to write data into one or more files depending upon the {@code
@@ -328,6 +331,9 @@ public class ParquetFileWriter {
    */
   private ParquetWriter<Integer> createWriter(Path filePath, WriteSupport<Integer> writeSupport)
       throws IOException {
+    String codecName =
+        configuration.get(ParquetOutputFormat.COMPRESSION, CompressionCodecName.SNAPPY.name());
+    logger.info("parquet writer codec name: {}", codecName);
     return new ParquetRowDataBuilder(filePath, writeSupport)
         .withCompressionCodec(
             CompressionCodecName.fromConf(
